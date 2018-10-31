@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WaterView">
+        <!--view的布局样式-->
+        <attr name="layout_style">
+            <enum name="rectangle_random" value="100" />
+            <enum name="circle_random" value="101" />
+        </attr>
+        <!--view动画效果-->
+        <attr name="view_animation">
+            <enum name="scale" value="102" />
+            <enum name="translate" value="103" />
+        </attr>
+        <!--圆形布局时,间隔角度,默认20,即圆周一圈最多可放360/20=18个view-->
+        <attr name="angle" format="integer" />
+        <!--view中的图片-->
+        <attr name="imageRes" format="reference" />
+        <!--view移除时的动画-->
+        <attr name="destroy_point">
+            <enum name="view_right_top" value="200" />
+            <enum name="view_right_bottom" value="201" />
+            <enum name="view_left_top" value="202" />
+            <enum name="view_left_bottom" value="203" />
+            <enum name="view_top" value="204" />
+            <enum name="view_bottom" value="205" />
+            <enum name="view_center" value="206" />
+            <enum name="view_self" value="207" />
+        </attr>
+        <!--设置水滴视图drawable位置-->
+        <attr name="drawable_position">
+            <enum name="background" value="208" />
+            <enum name="drawable_top" value="209" />
+        </attr>
+        <!--TextView中文本颜色-->
+        <attr name="text_color" format="color" />
+        <!--TextView中文本大小-->
+        <attr name="text_size" format="integer" />
+    </declare-styleable>
+
+</resources>

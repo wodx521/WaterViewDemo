@@ -1,0 +1,118 @@
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+version '1.0.0'
+group 'com.wanou'
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "wodx521"
+            name "zhangning"
+            email "wanoudexin@outlook.com"
+        }
+    }
+
+    scm {
+        url "https://github.com/wodx521/WaterViewSamples"
+    }
+}
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/outputs/aar/waterview-release.aar")
+            groupId
+            artifactId 'waterview'
+            version this.version
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each {
+                    // Ensure dependencies such as fileTree are not included in the pom.
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
+        }
+    }
+
+//    publications {
+//        MyPublication(MavenPublication) {
+////            from components.java
+//            artifact sourcesJar
+//            artifact javadocJar
+//            groupId it.group
+//            artifactId 'waterview'
+//            version '1.0.0'
+//            pom.withXml {
+//                def root = asNode()
+//                root.appendNode('description', 'WaterView')
+//                root.appendNode('name', 'waterview')
+//                root.appendNode('url', 'https://github.com/wodx521/WaterViewSamples')
+//                root.children().last() + pomConfig
+//            }
+//        }
+//    }
+}
+task javadoc(type: Javadoc) {
+    options.encoding = "UTF-8" // 设置编码，否则中文可能会提示出错
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.encoding "UTF-8"
+    options.charSet 'UTF-8'
+    options.author true
+    options.version true
+    options.links "https://github.com/linglongxin24/FastDev/tree/master/mylibrary/docs/javadoc"
+    failOnError false
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ?: System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
+    publications = ['Production']
+    configurations = ['archives']
+    override = true
+    pkg {
+        repo = 'maven'
+        name = 'waterview'
+        description = "An example of using the bintray plugin with gradle plugin 3.0.0"
+        publish = true
+        publicDownloadNumbers = true
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/wodx521/WaterViewSamples.git'
+        dryRun = true
+        version {
+            name = this.version
+            desc = "Example ${this.version}"
+            released = new Date()
+            vcsTag = this.version
+        }
+    }
+}
