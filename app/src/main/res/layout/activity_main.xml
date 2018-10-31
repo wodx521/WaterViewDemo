@@ -1,18 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.wanou.waterview.widget.WaterView
+        android:id="@+id/water_view"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@color/colorPrimary" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全局随机" />
+
+        <Button
+            android:id="@+id/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中心圆随机" />
+
+        <Button
+            android:id="@+id/right_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右下" />
+
+        <Button
+            android:id="@+id/left_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左下" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上" />
+
+        <Button
+            android:id="@+id/bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下" />
+
+        <Button
+            android:id="@+id/self_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自身中心" />
+
+        <Button
+            android:id="@+id/view_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="视图中心" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/right_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="右上" />
+
+
+        <Button
+            android:id="@+id/left_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左上" />
+
+        <Button
+            android:id="@+id/change_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更新图片" />
+
+
+        <Button
+            android:id="@+id/default_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="默认图片" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/scale_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="缩放动画" />
+
+
+        <Button
+            android:id="@+id/translate_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="平移动画" />
+
+        <Button
+            android:id="@+id/drawable_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="背景" />
+
+        <Button
+            android:id="@+id/drawable_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="文字上部" />
+    </LinearLayout>
+</LinearLayout>
