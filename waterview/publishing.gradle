@@ -2,9 +2,9 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 version = "1.0.0"
 
-def siteUrl = 'https://github.com/wodx521/WaterViewSamples'    // Git项目主页def
+def siteUrl = 'https://github.com/wodx521/WaterViewDemo'    // Git项目主页def
 
-def gitUrl = 'https://github.com/wodx521/WaterViewSamples.git' // Git仓库url
+def gitUrl = 'https://github.com/wodx521/WaterViewDemo.git' // Git仓库url
 
 group = "com.wanou" // 一般为包名
 
@@ -14,7 +14,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'WaterView'
+                name 'waterview'
                 description 'Android'// 项目描述
                 url siteUrl
                 licenses {
@@ -82,7 +82,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"        // 发布到Maven库
-        name = "WaterView"     // 发布到JCenter上的项目名字
+        name = "waterview"     // 发布到JCenter上的项目名字
         userOrg = 'wodx521' // Bintray的用户名。
         websiteUrl = siteUrl
         vcsUrl = gitUrl
