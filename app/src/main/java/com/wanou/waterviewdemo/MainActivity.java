@@ -1,5 +1,6 @@
 package com.wanou.waterviewdemo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private WaterView mWaterView;
     private List<Water> waterList = new ArrayList<>();
+    private int textsize = 18;
 
     @Override
     protected int getResId() {
@@ -41,6 +43,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Button mLeftTop = findViewById(R.id.left_top);
         Button drawableBackground = findViewById(R.id.drawable_background);
         Button drawableTop = findViewById(R.id.drawable_top);
+        Button randomColor = findViewById(R.id.random_color);
+        Button defaultColor = findViewById(R.id.default_color);
+        Button textsize = findViewById(R.id.textsize);
+        Button defaultSize = findViewById(R.id.default_size);
 
         mAll.setOnClickListener(this);
         mCircle.setOnClickListener(this);
@@ -58,6 +64,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mLeftTop.setOnClickListener(this);
         drawableBackground.setOnClickListener(this);
         drawableTop.setOnClickListener(this);
+        randomColor.setOnClickListener(this);
+        defaultColor.setOnClickListener(this);
+        textsize.setOnClickListener(this);
+        defaultSize.setOnClickListener(this);
     }
 
     @Override
@@ -73,7 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         mWaterView.setClickListener(new WaterView.ClickListener() {
             @Override
-            public void onViewClickListener(View view, int finalI) {
+            public void clickListener(View view, int finalI) {
                 mWaterView.setViewInterpolator(null);
                 mWaterView.animRemoveView(view);
             }
@@ -131,15 +141,40 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mWaterView.setImageRes(R.drawable.shape_view);
                 mWaterView.setWaters(waterList);
                 break;
-//            case R.id.drawable_background:
-//                mWaterView.setDrawablePosition(WaterView.BACKGROUND);
-//                mWaterView.setWaters(waterList);
-//                break;
-//            case R.id.drawable_top:
-//            default:
-//                mWaterView.setDrawablePosition(WaterView.DRAWABLE_TOP);
-//                mWaterView.setWaters(waterList);
-//                break;
+            case R.id.drawable_background:
+                mWaterView.setDrawablePosition(WaterView.BACKGROUND);
+                mWaterView.setWaters(waterList);
+                break;
+            case R.id.drawable_top:
+                mWaterView.setDrawablePosition(WaterView.DRAWABLE_TOP);
+                mWaterView.setWaters(waterList);
+                break;
+            case R.id.random_color:
+                int red = (int) (Math.random() * 200 + 10);
+                int blue = (int) (Math.random() * 200 + 10);
+                int green = (int) (Math.random() * 200 + 10);
+                int rgb = Color.rgb(red, green, blue);
+                mWaterView.setTextColor(rgb);
+                mWaterView.setWaters(waterList);
+                break;
+            case R.id.default_color:
+                mWaterView.setTextColor(Color.WHITE);
+                mWaterView.setWaters(waterList);
+                break;
+            case R.id.textsize:
+                textsize += 2;
+                if (textsize >= 30) {
+                    textsize = 30;
+                }
+                mWaterView.setTextSize(textsize);
+                mWaterView.setWaters(waterList);
+                break;
+            case R.id.default_size:
+            default:
+                textsize = 18;
+                mWaterView.setTextSize(textsize);
+                mWaterView.setWaters(waterList);
+                break;
         }
     }
 }

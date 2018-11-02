@@ -11,6 +11,8 @@
         android:id="@+id/water_view"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        app:text_size="20"
+        app:text_color="@color/colorAccent"
         android:background="@color/colorPrimary" />
 
     <LinearLayout
@@ -133,5 +135,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="文字上部" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/random_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="随机颜色" />
+
+
+        <Button
+            android:id="@+id/default_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="默认颜色" />
+
+        <Button
+            android:id="@+id/textsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="文字大小" />
+
+        <Button
+            android:id="@+id/default_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="默认文字大小" />
     </LinearLayout>
 </LinearLayout>

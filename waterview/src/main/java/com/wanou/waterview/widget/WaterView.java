@@ -174,11 +174,19 @@ public class WaterView extends FrameLayout {
         }
     }
 
-    //线程或动画时,页面销毁时,移除线程或动画
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
+    }
+
+    public void setTextSize(int textSize) {
+        this.textSize = textSize;
+    }
+
+    //页面销毁时,移除动画
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-
+        clearView();
     }
 
     /**
