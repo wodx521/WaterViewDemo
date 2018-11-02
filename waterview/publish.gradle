@@ -1,6 +1,6 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-version = "1.0.0"
+version = "1.0.1"
 
 def siteUrl = 'https://github.com/wodx521/WaterViewDemo'    // Git项目主页def
 
