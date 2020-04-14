@@ -8,8 +8,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -416,16 +416,16 @@ public class WaterView extends FrameLayout {
         float distance;
         switch (destroyPoint) {
             case VIEW_RIGHT_TOP:
-                mDestroyPoint = new Point(0, 0);
-                break;
-            case VIEW_LEFT_TOP:
                 mDestroyPoint = new Point(viewWidth, 0);
                 break;
+            case VIEW_LEFT_TOP:
+                mDestroyPoint = new Point(0, 0);
+                break;
             case VIEW_RIGHT_BOTTOM:
-                mDestroyPoint = new Point(0, viewHeight);
+                mDestroyPoint = new Point(viewWidth, viewHeight);
                 break;
             case VIEW_LEFT_BOTTOM:
-                mDestroyPoint = new Point(viewWidth, viewHeight);
+                mDestroyPoint = new Point(0, viewHeight);
                 break;
             case VIEW_TOP:
                 mDestroyPoint = new Point((int) x, 0);

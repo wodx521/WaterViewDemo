@@ -3,18 +3,22 @@ package com.wanou.waterviewdemo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.wanou.testlib.LibraryUtils;
 import com.wanou.testlib.base.BaseActivity;
+import com.wanou.testlib.base.BaseRecycleViewAdapter;
 import com.wanou.waterview.bean.Water;
 import com.wanou.waterview.widget.WaterView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private WaterView mWaterView;
+public class MainActivity extends BaseActivity {
+    private WaterView waterView;
+    private RecyclerView rvOperate;
     private List<Water> waterList = new ArrayList<>();
     private int textsize = 18;
 
@@ -26,48 +30,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
-        mWaterView = findViewById(R.id.water_view);
-        Button mAll = findViewById(R.id.all);
-        Button mCircle = findViewById(R.id.circle);
-        Button mRightBottom = findViewById(R.id.right_bottom);
-        Button mLeftBottom = findViewById(R.id.left_bottom);
-        Button mTop = findViewById(R.id.top);
-        Button mBottom = findViewById(R.id.bottom);
-        Button mSelfNone = findViewById(R.id.self_none);
-        Button mViewCenter = findViewById(R.id.view_center);
-        Button mScaleAnimation = findViewById(R.id.scale_animation);
-        Button mTranslateAnimation = findViewById(R.id.translate_animation);
-        Button mChangeImage = findViewById(R.id.change_image);
-        Button mDefaultImage = findViewById(R.id.default_image);
-        Button mRightTop = findViewById(R.id.right_top);
-        Button mLeftTop = findViewById(R.id.left_top);
-        Button drawableBackground = findViewById(R.id.drawable_background);
-        Button drawableTop = findViewById(R.id.drawable_top);
-        Button randomColor = findViewById(R.id.random_color);
-        Button defaultColor = findViewById(R.id.default_color);
-        Button textsize = findViewById(R.id.textsize);
-        Button defaultSize = findViewById(R.id.default_size);
-
-        mAll.setOnClickListener(this);
-        mCircle.setOnClickListener(this);
-        mRightBottom.setOnClickListener(this);
-        mLeftBottom.setOnClickListener(this);
-        mTop.setOnClickListener(this);
-        mBottom.setOnClickListener(this);
-        mSelfNone.setOnClickListener(this);
-        mViewCenter.setOnClickListener(this);
-        mScaleAnimation.setOnClickListener(this);
-        mTranslateAnimation.setOnClickListener(this);
-        mChangeImage.setOnClickListener(this);
-        mDefaultImage.setOnClickListener(this);
-        mRightTop.setOnClickListener(this);
-        mLeftTop.setOnClickListener(this);
-        drawableBackground.setOnClickListener(this);
-        drawableTop.setOnClickListener(this);
-        randomColor.setOnClickListener(this);
-        defaultColor.setOnClickListener(this);
-        textsize.setOnClickListener(this);
-        defaultSize.setOnClickListener(this);
+        waterView = findViewById(R.id.water_view);
+        rvOperate = findViewById(R.id.rvOperate);
     }
 
     @Override
@@ -75,106 +39,133 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         for (int i = 0; i < 10; i++) {
             waterList.add(new Water(i + 5 + "g", "测试"));
         }
+        String[] stringArray = getResources().getStringArray(R.array.operateContent);
+        OperateAdapter operateAdapter = new OperateAdapter(this);
+        rvOperate.setAdapter(operateAdapter);
+
+        operateAdapter.setContentList(Arrays.asList(stringArray));
+        operateAdapter.setOnItemClickListener(new BaseRecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View view, int position) {
+                switch (position) {
+                    case 0:
+                        // 全局随机
+                        waterView.setLayoutStyle(WaterView.RECTANGLE_RANDOM);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 1:
+                        // 中心随机
+                        waterView.setLayoutStyle(WaterView.CIRCLE_RANDOM);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 2:
+                        // 上
+                        waterView.setDestroyPoint(WaterView.VIEW_TOP);
+                        break;
+                    case 3:
+                        // 下
+                        waterView.setDestroyPoint(WaterView.VIEW_BOTTOM);
+                        break;
+                    case 4:
+                        // 左上
+                        waterView.setDestroyPoint(WaterView.VIEW_LEFT_TOP);
+                        break;
+                    case 5:
+                        // 右上
+                        waterView.setDestroyPoint(WaterView.VIEW_RIGHT_TOP);
+                        break;
+                    case 6:
+                        // 左下
+                        waterView.setDestroyPoint(WaterView.VIEW_LEFT_BOTTOM);
+                        break;
+                    case 7:
+                        // 右下
+                        waterView.setDestroyPoint(WaterView.VIEW_RIGHT_BOTTOM);
+                        break;
+                    case 8:
+                        // 自身中心
+                        waterView.setDestroyPoint(WaterView.VIEW_SELF);
+                        break;
+                    case 9:
+                        // 视图中心
+                        waterView.setDestroyPoint(WaterView.VIEW_CENTER);
+                        break;
+                    case 10:
+                        // 更新图片
+                        waterView.setImageRes(R.drawable.water_icon);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 11:
+                        // 默认图片
+                        waterView.setImageRes(R.drawable.shape_view);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 12:
+                        // 缩放动画
+                        waterView.setViewAnimation(WaterView.SCALE);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 13:
+                        // 平移动画
+                        waterView.setViewAnimation(WaterView.TRANSLATE);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 14:
+                        // 文字中心
+                        waterView.setDrawablePosition(WaterView.BACKGROUND);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 15:
+                        // 文字上部
+                        waterView.setDrawablePosition(WaterView.DRAWABLE_TOP);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 16:
+                        // 随机颜色
+                        int red = (int) (Math.random() * 200 + 10);
+                        int blue = (int) (Math.random() * 200 + 10);
+                        int green = (int) (Math.random() * 200 + 10);
+                        int rgb = Color.rgb(red, green, blue);
+                        waterView.setTextColor(rgb);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 17:
+                        // 默认颜色
+                        waterView.setTextColor(Color.WHITE);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 18:
+                        // 文字大小
+                        textsize += 2;
+                        if (textsize >= 30) {
+                            textsize = 30;
+                        }
+                        waterView.setTextSize(textsize);
+                        waterView.setWaters(waterList);
+                        break;
+                    case 19:
+                    default:
+                        // 默认文字大小
+                        textsize = 18;
+                        waterView.setTextSize(textsize);
+                        waterView.setWaters(waterList);
+                        break;
+                }
+            }
+        });
+
     }
 
     @Override
     protected void setData() {
-        mWaterView.setWaters(waterList);
+        waterView.setWaters(waterList);
 
-        mWaterView.setClickListener(new WaterView.ClickListener() {
+        waterView.setClickListener(new WaterView.ClickListener() {
             @Override
             public void clickListener(View view, int finalI) {
-                mWaterView.setViewInterpolator(null);
-                mWaterView.animRemoveView(view);
+                waterView.setViewInterpolator(null);
+                waterView.animRemoveView(view);
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.circle:
-                mWaterView.setLayoutStyle(WaterView.CIRCLE_RANDOM);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.all:
-                mWaterView.setLayoutStyle(WaterView.RECTANGLE_RANDOM);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.right_bottom:
-                mWaterView.setDestroyPoint(WaterView.VIEW_RIGHT_BOTTOM);
-                break;
-            case R.id.left_bottom:
-                mWaterView.setDestroyPoint(WaterView.VIEW_LEFT_BOTTOM);
-                break;
-            case R.id.top:
-                mWaterView.setDestroyPoint(WaterView.VIEW_TOP);
-                break;
-            case R.id.bottom:
-                mWaterView.setDestroyPoint(WaterView.VIEW_BOTTOM);
-                break;
-            case R.id.self_none:
-                mWaterView.setDestroyPoint(WaterView.VIEW_SELF);
-                break;
-            case R.id.view_center:
-                mWaterView.setDestroyPoint(WaterView.VIEW_CENTER);
-                break;
-            case R.id.right_top:
-                mWaterView.setDestroyPoint(WaterView.VIEW_RIGHT_TOP);
-                break;
-            case R.id.left_top:
-                mWaterView.setDestroyPoint(WaterView.VIEW_LEFT_TOP);
-                break;
-            case R.id.scale_animation:
-                mWaterView.setViewAnimation(WaterView.SCALE);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.translate_animation:
-                mWaterView.setViewAnimation(WaterView.TRANSLATE);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.change_image:
-                mWaterView.setImageRes(R.drawable.water_icon);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.default_image:
-                mWaterView.setImageRes(R.drawable.shape_view);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.drawable_background:
-                mWaterView.setDrawablePosition(WaterView.BACKGROUND);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.drawable_top:
-                mWaterView.setDrawablePosition(WaterView.DRAWABLE_TOP);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.random_color:
-                int red = (int) (Math.random() * 200 + 10);
-                int blue = (int) (Math.random() * 200 + 10);
-                int green = (int) (Math.random() * 200 + 10);
-                int rgb = Color.rgb(red, green, blue);
-                mWaterView.setTextColor(rgb);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.default_color:
-                mWaterView.setTextColor(Color.WHITE);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.textsize:
-                textsize += 2;
-                if (textsize >= 30) {
-                    textsize = 30;
-                }
-                mWaterView.setTextSize(textsize);
-                mWaterView.setWaters(waterList);
-                break;
-            case R.id.default_size:
-            default:
-                textsize = 18;
-                mWaterView.setTextSize(textsize);
-                mWaterView.setWaters(waterList);
-                break;
-        }
     }
 }

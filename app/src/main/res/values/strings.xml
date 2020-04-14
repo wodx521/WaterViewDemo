@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">WaterViewDemo</string>
+
+    <string-array name="operateContent">
+        <item>全局随机</item>
+        <item>中心随机</item>
+        <item>上</item>
+        <item>下</item>
+        <item>左上</item>
+        <item>右上</item>
+        <item>左下</item>
+        <item>右下</item>
+        <item>自身中心</item>
+        <item>视图中心</item>
+        <item>更新图片</item>
+        <item>默认图片</item>
+        <item>缩放动画</item>
+        <item>平移动画</item>
+        <item>文字中心</item>
+        <item>文字上部</item>
+        <item>随机颜色</item>
+        <item>默认颜色</item>
+        <item>文字大小</item>
+        <item>默认文字大小</item>
+    </string-array>
 </resources>
